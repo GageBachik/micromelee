@@ -11,12 +11,14 @@ import SpriteKit
 
 class Card: SKSpriteNode {
     let id: Int
+    let type: String
     let effect: String
     let cost: Int
     let action: () -> ()
     
-    init(id: Int, name: String, effect: String, cost: Int, action: () -> ()) {
+    init(id: Int, name: String, type: String, effect: String, cost: Int, action: () -> ()) {
         self.id = id
+        self.type = type
         self.effect = effect
         self.cost = cost
         self.action = action
@@ -29,7 +31,7 @@ class Card: SKSpriteNode {
     }
     
     override func copyWithZone(zone: NSZone) -> AnyObject {
-        let copy = Card(id: id, name: name!, effect: effect, cost: cost, action: action)
+        let copy = Card(id: id, name: name!, type: type, effect: effect, cost: cost, action: action)
         return copy
     }
 }
@@ -47,6 +49,7 @@ class Card: SKSpriteNode {
 let Pleb = Card(
     id: 0,
     name: "Pleb",
+    type: "monster",
     effect: "Place a weak plebian warrior.",
     cost: 20,
     action: PlebAction
@@ -55,6 +58,7 @@ let Pleb = Card(
 let Ranger = Card(
     id: 1,
     name: "Ranger",
+    type: "monster",
     effect: "Place a weak ranged warrior.",
     cost: 25,
     action: RangerAction
@@ -63,6 +67,7 @@ let Ranger = Card(
 let Fighter = Card(
     id: 2,
     name: "Fighter",
+    type: "monster",
     effect: "Place a hand to hand brawler into battle.",
     cost: 80,
     action: FighterAction
@@ -71,6 +76,7 @@ let Fighter = Card(
 let BossMan = Card(
     id: 3,
     name: "BossMan",
+    type: "monster",
     effect: "Wreck faces with a heroic Boss Man.",
     cost: 160,
     action: BossManAction
@@ -79,6 +85,7 @@ let BossMan = Card(
 let Rally = Card(
     id: 4,
     name: "Rally",
+    type: "spell",
     effect: "Place a rally point to direct your warriors",
     cost: 10,
     action: RallyAction
@@ -87,6 +94,7 @@ let Rally = Card(
 let Shield = Card(
     id: 5,
     name: "Shield",
+    type: "spell",
     effect: "Give a character or structure a small hp shield.",
     cost: 20,
     action: ShieldAction
@@ -95,6 +103,7 @@ let Shield = Card(
 let Bomb = Card(
     id: 6,
     name: "Bomb",
+    type: "spell",
     effect: "Deal moderate damage in a small radius.",
     cost: 30,
     action: BombAction
@@ -103,6 +112,7 @@ let Bomb = Card(
 let Decoy = Card(
     id: 7,
     name: "Decoy",
+    type: "trap",
     effect: "Place a decoy that distracts enemy warriors.",
     cost: 30,
     action: DecoyAction
@@ -111,6 +121,7 @@ let Decoy = Card(
 let Turret = Card(
     id: 8,
     name: "Turret",
+    type: "trap",
     effect: "Place a ranged turret to defend a small area",
     cost: 40,
     action: TurretAction
@@ -119,6 +130,7 @@ let Turret = Card(
 let PlebFactory = Card(
     id: 9,
     name: "PlebFactory",
+    type: "trap",
     effect: "A structure that produces 1 Pleb every 5 seconds.",
     cost: 160,
     action: PlebFactoryAction

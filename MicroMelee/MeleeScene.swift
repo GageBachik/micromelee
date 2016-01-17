@@ -65,8 +65,6 @@ class MeleeScene: SKScene {
         print("card: \(card1)")
         print("card: \(card2)")
         print("card: \(card3)")
-        print("cardAction: \(card0.action)")
-        card0.action()
         addChild(card0)
         addChild(card1)
         addChild(card2)
