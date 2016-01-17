@@ -117,8 +117,8 @@
 				23E8D5911C4B0CB600C8F89F /* Assets.xcassets */,
 				23E8D5931C4B0CB600C8F89F /* LaunchScreen.storyboard */,
 				23E8D5961C4B0CB600C8F89F /* Info.plist */,
-				73E75A471C4B0FE700C95610 /* MeleeScene.swift */,
 				23E8D5B81C4B3B0200C8F89F /* MeleeScene.sks */,
+				73E75A471C4B0FE700C95610 /* MeleeScene.swift */,
 				73E75A4D1C4B730600C95610 /* ActionStore.swift */,
 				73E75A4F1C4B754600C95610 /* CardStore.swift */,
 			);

@@ -14,15 +14,21 @@ class Card: SKSpriteNode {
     let type: String
     let effect: String
     let cost: Int
-    let action: (size: CGSize, position: CGPoint) -> (SKSpriteNode)
+    var action: ((size: CGSize, position: CGPoint) -> (SKSpriteNode))?
+    var monsterAction: ((size: CGSize, position: CGPoint) -> (Monster))?
     
-    init(id: Int, name: String, type: String, effect: String, cost: Int, action: (size: CGSize, position: CGPoint) -> (SKSpriteNode)) {
+    init(id: Int, name: String, type: String, effect: String, cost: Int, action: ((size: CGSize, position: CGPoint) -> (SKSpriteNode))?=nil, monsterAction: ((size: CGSize, position: CGPoint) -> (Monster))?=nil) {
         self.id = id
         self.type = type
         self.effect = effect
         self.cost = cost
-        self.action = action
         super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(0, 0))
+        if let sAction = action {
+            self.action = sAction
+        }
+        if let mAction = monsterAction {
+            self.monsterAction = mAction
+        }
         self.name = name
     }
 
@@ -31,7 +37,7 @@ class Card: SKSpriteNode {
     }
     
     override func copyWithZone(zone: NSZone) -> AnyObject {
-        let copy = Card(id: id, name: name!, type: type, effect: effect, cost: cost, action: action)
+        let copy = Card(id: id, name: name!, type: type, effect: effect, cost: cost, action: action, monsterAction: monsterAction)
         return copy
     }
 }
@@ -52,7 +58,7 @@ let Pleb = Card(
     type: "monster",
     effect: "Place a weak plebian warrior.",
     cost: 20,
-    action: PlebAction
+    monsterAction: PlebAction
 )
 
 let Ranger = Card(
@@ -61,7 +67,7 @@ let Ranger = Card(
     type: "monster",
     effect: "Place a weak ranged warrior.",
     cost: 25,
-    action: RangerAction
+    monsterAction: RangerAction
 )
 
 let Fighter = Card(
@@ -70,7 +76,7 @@ let Fighter = Card(
     type: "monster",
     effect: "Place a hand to hand brawler into battle.",
     cost: 80,
-    action: FighterAction
+    monsterAction: FighterAction
 )
 
 let BossMan = Card(
@@ -79,7 +85,7 @@ let BossMan = Card(
     type: "monster",
     effect: "Wreck faces with a heroic Boss Man.",
     cost: 160,
-    action: BossManAction
+    monsterAction: BossManAction
 )
 
 let Rally = Card(

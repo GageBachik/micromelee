@@ -24,10 +24,30 @@ import SpriteKit
 //    drawCard()
 //}
 
+class Monster: SKSpriteNode {
+    let hp: Int
+    let atk: Int
+    let vis: Int
+    let range: Int
+    
+    init(hp: Int, atk: Int, vis: Int, range: Int) {
+        self.hp = hp
+        self.atk = atk
+        self.vis = vis
+        self.range = range
+        
+        super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(0, 0))
+    }
 
-func PlebAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+func PlebAction (size: CGSize, position: CGPoint) -> Monster {
     print("Played Pleb. size:\(size) pos:\(position)")
-    let sprite = SKSpriteNode()
+    let sprite = Monster(hp: 15, atk: 2, vis: 8, range: 1)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -36,9 +56,9 @@ func PlebAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     return sprite
 }
 
-func RangerAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
+func RangerAction (size: CGSize, position: CGPoint) -> Monster {
     print("Played Ranger.")
-    let sprite = SKSpriteNode()
+    let sprite = Monster(hp: 10, atk: 3, vis: 8, range: 6)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -47,9 +67,9 @@ func RangerAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     return sprite
 }
 
-func FighterAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
+func FighterAction (size: CGSize, position: CGPoint) -> Monster {
     print("Played Fighter.")
-    let sprite = SKSpriteNode()
+    let sprite = Monster(hp: 30, atk: 5, vis: 6, range: 1)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -58,9 +78,9 @@ func FighterAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     return sprite
 }
 
-func BossManAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
+func BossManAction (size: CGSize, position: CGPoint) -> Monster {
     print("Played BossMan.")
-    let sprite = SKSpriteNode()
+    let sprite = Monster(hp: 60, atk: 12, vis: 4, range: 3)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
