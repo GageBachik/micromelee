@@ -143,6 +143,7 @@ class MeleeScene: SKScene {
                                     manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - cost
                                     manaLabel.text = "\(newVal)"
+                                    addChild(monster)
                                     drawCard()
                                 } else if selectedCard!.type == "spell" {
                                     let spell = selectedCard!.action(size: CGSizeMake(20, 20), position: touchedNode.position)
@@ -150,6 +151,7 @@ class MeleeScene: SKScene {
                                     manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - cost
                                     manaLabel.text = "\(newVal)"
+                                    addChild(spell)
                                     drawCard()
                                 }else if selectedCard!.type == "structure" {
                                     let structure = selectedCard!.action(size: CGSizeMake(20, 20), position: touchedNode.position)
@@ -157,6 +159,7 @@ class MeleeScene: SKScene {
                                     manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - cost  
                                     manaLabel.text = "\(newVal)"
+                                    addChild(structure)
                                     drawCard()
                                 }
                             }

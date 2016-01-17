@@ -27,50 +27,110 @@ import SpriteKit
 
 func PlebAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     print("Played Pleb. size:\(size) pos:\(position)")
-    return SKSpriteNode()
+    let sprite = SKSpriteNode()
+    sprite.size = size
+    sprite.position = position
+    sprite.anchorPoint = CGPoint(x: 0, y: 0)
+    sprite.color = .blackColor()
+    sprite.name = "Pleb"
+    return sprite
 }
 
 func RangerAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     print("Played Ranger.")
-    return SKSpriteNode()
+    let sprite = SKSpriteNode()
+    sprite.size = size
+    sprite.position = position
+    sprite.anchorPoint = CGPoint(x: 0, y: 0)
+    sprite.color = .whiteColor()
+    sprite.name = "Ranger"
+    return sprite
 }
 
 func FighterAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     print("Played Fighter.")
-    return SKSpriteNode()
+    let sprite = SKSpriteNode()
+    sprite.size = size
+    sprite.position = position
+    sprite.anchorPoint = CGPoint(x: 0, y: 0)
+    sprite.color = .blueColor()
+    sprite.name = "Fighter"
+    return sprite
 }
 
 func BossManAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     print("Played BossMan.")
-    return SKSpriteNode()
+    let sprite = SKSpriteNode()
+    sprite.size = size
+    sprite.position = position
+    sprite.anchorPoint = CGPoint(x: 0, y: 0)
+    sprite.color = .yellowColor()
+    sprite.name = "BossMan"
+    return sprite
 }
 
 func RallyAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     print("Played Rally.")
-    return SKSpriteNode()
+    let sprite = SKSpriteNode()
+    sprite.size = size
+    sprite.position = position
+    sprite.anchorPoint = CGPoint(x: 0, y: 0)
+    sprite.color = .orangeColor()
+    sprite.name = "Rally"
+    return sprite
 }
 
 func ShieldAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     print("Played Shield.")
-    return SKSpriteNode()
+    let sprite = SKSpriteNode()
+    sprite.size = size
+    sprite.position = position
+    sprite.anchorPoint = CGPoint(x: 0, y: 0)
+    sprite.color = .orangeColor()
+    sprite.name = "Shield"
+    return sprite
 }
 
 func BombAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     print("Played Bomb.")
-    return SKSpriteNode()
+    let sprite = SKSpriteNode()
+    sprite.size = size
+    sprite.position = position
+    sprite.anchorPoint = CGPoint(x: 0, y: 0)
+    sprite.color = .orangeColor()
+    sprite.name = "Bomb"
+    return sprite
 }
 
 func DecoyAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     print("Played Decoy.")
-    return SKSpriteNode()
+    let sprite = SKSpriteNode()
+    sprite.size = size
+    sprite.position = position
+    sprite.anchorPoint = CGPoint(x: 0, y: 0)
+    sprite.color = .brownColor()
+    sprite.name = "Decoy"
+    return sprite
 }
 
 func TurretAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     print("Played Turret.")
-    return SKSpriteNode()
+    let sprite = SKSpriteNode()
+    sprite.size = size
+    sprite.position = position
+    sprite.anchorPoint = CGPoint(x: 0, y: 0)
+    sprite.color = .brownColor()
+    sprite.name = "Turret"
+    return sprite
 }
 
 func PlebFactoryAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
-    print("Played Fleb Factory.")
-    return SKSpriteNode()
+    print("Played Pleb Factory.")
+    let sprite = SKSpriteNode()
+    sprite.size = size
+    sprite.position = position
+    sprite.anchorPoint = CGPoint(x: 0, y: 0)
+    sprite.color = .brownColor()
+    sprite.name = "PlebFactory"
+    return sprite
 }
