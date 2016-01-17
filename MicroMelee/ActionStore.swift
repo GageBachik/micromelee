@@ -7,43 +7,60 @@
 //
 
 import Foundation
+import SpriteKit
 
-func PlebAction () {
-    print("Played Pleb.")
+//let monster = SKSpriteNode()
+//monster.size = CGSizeMake(20, 20)
+//monster.color = .blackColor()
+//monster.anchorPoint = CGPoint(x: 0,y: 0)
+//monster.name = "NiggaMon"
+//monster.position = touchedNode.position
+//let cost = 20*ppm
+//if manaBar.size.height > cost {
+//    addChild(monster)
+//    manaBar.size.height -= cost
+//    let newVal = Int(manaLabel.text!)! - 20
+//    manaLabel.text = "\(newVal)"
+//    drawCard()
+//}
+
+
+func PlebAction (size: CGSize, position: CGPoint) {
+    print("Played Pleb. size:\(size) pos:\(position)")
 }
 
-func RangerAction () {
+func RangerAction (size: CGSize, position: CGPoint) {
     print("Played Ranger.")
 }
 
-func FighterAction () {
+func FighterAction (size: CGSize, position: CGPoint) {
     print("Played Fighter.")
 }
 
-func BossManAction () {
+func BossManAction (size: CGSize, position: CGPoint) {
     print("Played BossMan.")
 }
 
-func RallyAction () {
+func RallyAction (size: CGSize, position: CGPoint) {
     print("Played Rally.")
 }
 
-func ShieldAction () {
+func ShieldAction (size: CGSize, position: CGPoint) {
     print("Played Shield.")
 }
 
-func BombAction () {
+func BombAction (size: CGSize, position: CGPoint) {
     print("Played Bomb.")
 }
 
-func DecoyAction () {
+func DecoyAction (size: CGSize, position: CGPoint) {
     print("Played Decoy.")
 }
 
-func TurretAction () {
+func TurretAction (size: CGSize, position: CGPoint) {
     print("Played Turret.")
 }
 
-func PlebFactoryAction () {
+func PlebFactoryAction (size: CGSize, position: CGPoint) {
     print("Played Fleb Factory.")
 }

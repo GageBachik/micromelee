@@ -14,9 +14,9 @@ class Card: SKSpriteNode {
     let type: String
     let effect: String
     let cost: Int
-    let action: () -> ()
+    let action: (size: CGSize, position: CGPoint) -> ()
     
-    init(id: Int, name: String, type: String, effect: String, cost: Int, action: () -> ()) {
+    init(id: Int, name: String, type: String, effect: String, cost: Int, action: (size: CGSize, position: CGPoint) -> ()) {
         self.id = id
         self.type = type
         self.effect = effect
@@ -112,7 +112,7 @@ let Bomb = Card(
 let Decoy = Card(
     id: 7,
     name: "Decoy",
-    type: "trap",
+    type: "structure",
     effect: "Place a decoy that distracts enemy warriors.",
     cost: 30,
     action: DecoyAction
@@ -121,7 +121,7 @@ let Decoy = Card(
 let Turret = Card(
     id: 8,
     name: "Turret",
-    type: "trap",
+    type: "structure",
     effect: "Place a ranged turret to defend a small area",
     cost: 40,
     action: TurretAction
@@ -130,7 +130,7 @@ let Turret = Card(
 let PlebFactory = Card(
     id: 9,
     name: "PlebFactory",
-    type: "trap",
+    type: "structure",
     effect: "A structure that produces 1 Pleb every 5 seconds.",
     cost: 160,
     action: PlebFactoryAction
