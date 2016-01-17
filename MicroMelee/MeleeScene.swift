@@ -29,12 +29,37 @@ class MeleeScene: SKScene {
         }
         
         let card = SKSpriteNode()
-        card.size = CGSizeMake(sSize*5, sSize*5)
+        let cSize = sSize*4
+        card.size = CGSizeMake(cSize, cSize)
         card.color = .blackColor()
         card.anchorPoint = CGPoint(x: 0,y: 0)
         card.name = "Nigga"
-        card.position = CGPoint(x: size.width - sSize*5 - 7, y: size.height - sSize*5 - 7)
+        card.position = CGPoint(x: size.width - cSize - 7, y: size.height - cSize - 7)
         addChild(card)
+        
+        let card2 = SKSpriteNode()
+        card2.size = CGSizeMake(cSize, cSize)
+        card2.color = .blueColor()
+        card2.anchorPoint = CGPoint(x: 0,y: 0)
+        card2.name = "Blue"
+        card2.position = CGPoint(x: size.width - cSize - 7, y: size.height - (card.size.height + 5) - cSize - 7)
+        addChild(card2)
+        
+        let card3 = SKSpriteNode()
+        card3.size = CGSizeMake(cSize, cSize)
+        card3.color = .greenColor()
+        card3.anchorPoint = CGPoint(x: 0,y: 0)
+        card3.name = "Green"
+        card3.position = CGPoint(x: size.width - cSize - 7, y: size.height - (card.size.height*2 + 10) - cSize - 7)
+        addChild(card3)
+        
+        let card4 = SKSpriteNode()
+        card4.size = CGSizeMake(cSize, cSize)
+        card4.color = .yellowColor()
+        card4.anchorPoint = CGPoint(x: 0,y: 0)
+        card4.name = "Yellow"
+        card4.position = CGPoint(x: size.width - cSize - 7, y: size.height - (card.size.height*3 + 15) - cSize - 7)
+        addChild(card4)
         
     }
     
@@ -58,17 +83,45 @@ class MeleeScene: SKScene {
             let touchedNode = self.nodeAtPoint(positionInScene)
             print("position:\(touchedNode.position)")
             if let name = touchedNode.name {
-                if name.rangeOfString("sprite") != nil && selectedCard == "Nigga" {
+                if name.rangeOfString("sprite") != nil {
                     let id = name.substringFromIndex(name.startIndex.advancedBy(6))
                     print("id: \(id)")
                     if Int(id) <= 299 {
-                        let monster = SKSpriteNode()
-                        monster.size = CGSizeMake(20, 20)
-                        monster.color = .blackColor()
-                        monster.anchorPoint = CGPoint(x: 0,y: 0)
-                        monster.name = "NiggaMon"
-                        monster.position = touchedNode.position
-                        addChild(monster)
+                        
+                        if selectedCard == "Nigga"{
+                            let monster = SKSpriteNode()
+                            monster.size = CGSizeMake(20, 20)
+                            monster.color = .blackColor()
+                            monster.anchorPoint = CGPoint(x: 0,y: 0)
+                            monster.name = "NiggaMon"
+                            monster.position = touchedNode.position
+                            addChild(monster)
+                        }else if selectedCard == "Blue" {
+                            let monster = SKSpriteNode()
+                            monster.size = CGSizeMake(20, 20)
+                            monster.color = .blueColor()
+                            monster.anchorPoint = CGPoint(x: 0,y: 0)
+                            monster.name = "BlueMon"
+                            monster.position = touchedNode.position
+                            addChild(monster)
+                        }else if selectedCard == "Green" {
+                            let monster = SKSpriteNode()
+                            monster.size = CGSizeMake(20, 20)
+                            monster.color = .greenColor()
+                            monster.anchorPoint = CGPoint(x: 0,y: 0)
+                            monster.name = "GreenMon"
+                            monster.position = touchedNode.position
+                            addChild(monster)
+                        }else if selectedCard == "Yellow" {
+                            let monster = SKSpriteNode()
+                            monster.size = CGSizeMake(20, 20)
+                            monster.color = .yellowColor()
+                            monster.anchorPoint = CGPoint(x: 0,y: 0)
+                            monster.name = "YellowMon"
+                            monster.position = touchedNode.position
+                            addChild(monster)
+                        }
+                        
                     }
                 }
             }
