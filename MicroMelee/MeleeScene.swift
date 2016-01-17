@@ -65,10 +65,12 @@ class MeleeScene: SKScene {
         print("card: \(card1)")
         print("card: \(card2)")
         print("card: \(card3)")
-        addChild(card0.copy() as! SKNode)
-        addChild(card1.copy() as! SKNode)
-        addChild(card2.copy() as! SKNode)
-        addChild(card3.copy() as! SKNode)
+        print("cardAction: \(card0.action)")
+        card0.action()
+        addChild(card0)
+        addChild(card1)
+        addChild(card2)
+        addChild(card3)
         
         let maxManaHeight = size.height - offset*2
         manaBar.size = CGSizeMake(offset*2, maxManaHeight/10)
@@ -134,7 +136,6 @@ class MeleeScene: SKScene {
                     let id = name.substringFromIndex(name.startIndex.advancedBy(6))
                     print("id: \(id)")
                     if Int(id) <= 299 {
-                        
                         if let name = selectedCard.name {
                             if name == "Nigga"{
                                 let monster = SKSpriteNode()
