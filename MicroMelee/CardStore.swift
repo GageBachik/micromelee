@@ -14,9 +14,9 @@ class Card: SKSpriteNode {
     let type: String
     let effect: String
     let cost: Int
-    let action: (size: CGSize, position: CGPoint) -> ()
+    let action: (size: CGSize, position: CGPoint) -> (SKSpriteNode)
     
-    init(id: Int, name: String, type: String, effect: String, cost: Int, action: (size: CGSize, position: CGPoint) -> ()) {
+    init(id: Int, name: String, type: String, effect: String, cost: Int, action: (size: CGSize, position: CGPoint) -> (SKSpriteNode)) {
         self.id = id
         self.type = type
         self.effect = effect

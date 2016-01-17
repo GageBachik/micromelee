@@ -138,19 +138,22 @@ class MeleeScene: SKScene {
                             let manaCost = CGFloat(cost) * ppm
                             if manaBar.size.height > manaCost {
                                 if selectedCard!.type == "monster" {
-                                    selectedCard!.action(size: CGSizeMake(20, 20), position: touchedNode.position)
+                                    let monster = selectedCard!.action(size: CGSizeMake(20, 20), position: touchedNode.position)
+                                    print("monster: \(monster)")
                                     manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - cost
                                     manaLabel.text = "\(newVal)"
                                     drawCard()
                                 } else if selectedCard!.type == "spell" {
-                                    selectedCard!.action(size: CGSizeMake(20, 20), position: touchedNode.position)
+                                    let spell = selectedCard!.action(size: CGSizeMake(20, 20), position: touchedNode.position)
+                                    print("spell: \(spell)")
                                     manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - cost
                                     manaLabel.text = "\(newVal)"
                                     drawCard()
                                 }else if selectedCard!.type == "structure" {
-                                    selectedCard!.action(size: CGSizeMake(20, 20), position: touchedNode.position)
+                                    let structure = selectedCard!.action(size: CGSizeMake(20, 20), position: touchedNode.position)
+                                    print("structure: \(structure)")
                                     manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - cost
                                     manaLabel.text = "\(newVal)"
