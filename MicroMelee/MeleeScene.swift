@@ -31,7 +31,18 @@ class MeleeScene: SKScene {
         for touch in touches{
             let positionInScene = touch.locationInNode(self)
             let touchedNode = self.nodeAtPoint(positionInScene)
-            print("name:\(touchedNode.name), position:\(touchedNode.position)")
+            if let name = touchedNode.name {
+              print("name:\(name)")
+            }
+            
+        }
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches{
+            let positionInScene = touch.locationInNode(self)
+            let touchedNode = self.nodeAtPoint(positionInScene)
+            print("position:\(touchedNode.position)")
         }
     }
     
