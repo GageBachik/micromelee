@@ -34,7 +34,7 @@ extension MutableCollectionType where Index == Int {
 
 class MeleeScene: SKScene {
     
-    var selectedCard = SKSpriteNode()
+    var selectedCard: Card?
     var manaBar = SKSpriteNode()
     var manaLabel = SKLabelNode()
     var deck = [0,0,0,0,9,8,8,1,1,1,1,2,2,3,4,5,6,6,7,7].shuffle()
@@ -105,10 +105,11 @@ class MeleeScene: SKScene {
     }
     
     func drawCard(){
-        selectedCard.removeFromParent()
+        selectedCard!.removeFromParent()
         if (deck.isEmpty == false){
-            let newCard = deck.removeFirst()
-            generateCard(newCard, cardSize: selectedCard.size, cardPosition: selectedCard.position)
+            let newCardId = deck.removeFirst()
+            let newCard = generateCard(newCardId, cardSize: selectedCard!.size, cardPosition: selectedCard!.position)
+            addChild(newCard)
         }
     }
     
@@ -118,7 +119,7 @@ class MeleeScene: SKScene {
         for touch in touches{
             let positionInScene = touch.locationInNode(self)
             let touchedNode = self.nodeAtPoint(positionInScene)
-            if let sprite = touchedNode as? SKSpriteNode {
+            if let sprite = touchedNode as? Card {
                 selectedCard = sprite
             }
         }
@@ -128,86 +129,28 @@ class MeleeScene: SKScene {
         for touch in touches{
             let positionInScene = touch.locationInNode(self)
             let touchedNode = self.nodeAtPoint(positionInScene)
-            print("position:\(touchedNode.position)")
             if let name = touchedNode.name {
                 if name.rangeOfString("sprite") != nil {
                     let id = name.substringFromIndex(name.startIndex.advancedBy(6))
-                    print("id: \(id)")
                     if Int(id) <= 299 {
-                        if let name = selectedCard.name {
-                            if name == "Nigga"{
-                                let monster = SKSpriteNode()
-                                monster.size = CGSizeMake(20, 20)
-                                monster.color = .blackColor()
-                                monster.anchorPoint = CGPoint(x: 0,y: 0)
-                                monster.name = "NiggaMon"
-                                monster.position = touchedNode.position
-                                let ppm = self.manaBar.size.height / CGFloat(Float(self.manaLabel.text!)!)
-                                let cost = 20*ppm
-                                if manaBar.size.height > cost {
-                                    addChild(monster)
-                                    manaBar.size.height -= cost
+                        if let cost = selectedCard?.cost {
+                            let ppm = self.manaBar.size.height / CGFloat(Float(self.manaLabel.text!)!)
+                            let manaCost = CGFloat(cost) * ppm
+                            if manaBar.size.height > manaCost {
+                                if selectedCard!.type == "monster" {
+                                    selectedCard!.action(size: CGSizeMake(20, 20), position: touchedNode.position)
+                                    manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - 20
                                     manaLabel.text = "\(newVal)"
                                     drawCard()
                                 }
-                            }else if name == "White" {
-                                let monster = SKSpriteNode()
-                                monster.size = CGSizeMake(20, 20)
-                                monster.color = .whiteColor()
-                                monster.anchorPoint = CGPoint(x: 0,y: 0)
-                                monster.name = "WhiteMon"
-                                monster.position = touchedNode.position
-                                let ppm = self.manaBar.size.height / CGFloat(Float(self.manaLabel.text!)!)
-                                let cost = 30*ppm
-                                if manaBar.size.height > cost {
-                                    addChild(monster)
-                                    manaBar.size.height -= cost
-                                    let newVal = Int(manaLabel.text!)! - 30
-                                    manaLabel.text = "\(newVal)"
-                                    drawCard()
-                                }
-                            }else if name == "Green" {
-                                let monster = SKSpriteNode()
-                                monster.size = CGSizeMake(20, 20)
-                                monster.color = .greenColor()
-                                monster.anchorPoint = CGPoint(x: 0,y: 0)
-                                monster.name = "GreenMon"
-                                monster.position = touchedNode.position
-                                let ppm = self.manaBar.size.height / CGFloat(Float(self.manaLabel.text!)!)
-                                let cost = 80*ppm
-                                if manaBar.size.height > cost {
-                                    addChild(monster)
-                                    manaBar.size.height -= cost
-                                    let newVal = Int(manaLabel.text!)! - 80
-                                    manaLabel.text = "\(newVal)"
-                                    drawCard()
-                                }
-                            }else if name == "Yellow" {
-                                let monster = SKSpriteNode()
-                                monster.size = CGSizeMake(20, 20)
-                                monster.color = .yellowColor()
-                                monster.anchorPoint = CGPoint(x: 0,y: 0)
-                                monster.name = "YellowMon"
-                                monster.position = touchedNode.position
-                                let ppm = self.manaBar.size.height / CGFloat(Float(self.manaLabel.text!)!)
-                                let cost = 200*ppm
-                                if manaBar.size.height > cost {
-                                    addChild(monster)
-                                    manaBar.size.height -= cost
-                                    let newVal = Int(manaLabel.text!)! - 200
-                                    manaLabel.text = "\(newVal)"
-                                    drawCard()
-                                }
                             }
-
                         }
-                        
                     }
                 }
             }
         }
-        selectedCard = SKSpriteNode()
+        selectedCard = nil
     }
     
     override func update(currentTime: CFTimeInterval) {
