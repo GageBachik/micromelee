@@ -11,15 +11,17 @@ import SpriteKit
 class MeleeScene: SKScene {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        for i in 1...400 {
-            let floatI = CGFloat(i)
+        print("size: \(size.height), \(size.width)")
+        for i in 0...399 {
+            print("loop number: \(i)")
             let sprite = SKSpriteNode()
-            sprite.xScale = (size.height*0.96)/20
-            sprite.yScale = (size.height*0.96)/20
+            let sSize = floor((size.height*0.96)/20)
+            sprite.size = CGSizeMake(sSize, sSize)
             sprite.color = .blackColor()
-            let xPos = sprite.xScale*((floatI%20)-1)
-            let yPos = sprite.yScale*((floatI-1)/20)
+            let xPos = Int(sSize)*((i%20))
+            let yPos = Int(sSize)*((i)/20)
             sprite.position = CGPoint(x: xPos, y: yPos)
+            print("position: \(sprite.size)")
             addChild(sprite)
         }
     }

@@ -17,7 +17,6 @@
 		23E8D5A01C4B0CB600C8F89F /* MicroMeleeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E8D59F1C4B0CB600C8F89F /* MicroMeleeTests.swift */; };
 		23E8D5AB1C4B0CB600C8F89F /* MicroMeleeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E8D5AA1C4B0CB600C8F89F /* MicroMeleeUITests.swift */; };
 		73E75A481C4B0FE700C95610 /* MeleeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E75A471C4B0FE700C95610 /* MeleeScene.swift */; };
-		73E75A4A1C4B1ABD00C95610 /* MeleeScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 73E75A491C4B1ABD00C95610 /* MeleeScene.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +53,6 @@
 		23E8D5AA1C4B0CB600C8F89F /* MicroMeleeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicroMeleeUITests.swift; sourceTree = "<group>"; };
 		23E8D5AC1C4B0CB600C8F89F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73E75A471C4B0FE700C95610 /* MeleeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeleeScene.swift; sourceTree = "<group>"; };
-		73E75A491C4B1ABD00C95610 /* MeleeScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MeleeScene.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +112,6 @@
 				23E8D5931C4B0CB600C8F89F /* LaunchScreen.storyboard */,
 				23E8D5961C4B0CB600C8F89F /* Info.plist */,
 				73E75A471C4B0FE700C95610 /* MeleeScene.swift */,
-				73E75A491C4B1ABD00C95610 /* MeleeScene.sks */,
 			);
 			path = MicroMelee;
 			sourceTree = "<group>";
@@ -245,7 +242,6 @@
 				23E8D5891C4B0CB600C8F89F /* GameScene.sks in Resources */,
 				23E8D5951C4B0CB600C8F89F /* LaunchScreen.storyboard in Resources */,
 				23E8D5921C4B0CB600C8F89F /* Assets.xcassets in Resources */,
-				73E75A4A1C4B1ABD00C95610 /* MeleeScene.sks in Resources */,
 				23E8D5901C4B0CB600C8F89F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
