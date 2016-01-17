@@ -134,7 +134,9 @@ class MeleeScene: SKScene {
     
     func spawnMonster(mon:SKSpriteNode){
         let enemyBase = self.childNodeWithName("EnemyBase") as! SKSpriteNode
-        let moveBottomLeft = SKAction.moveTo(enemyBase.position, duration:5.0)
+        let xTarget = enemyBase.position.x + ((enemyBase.size.width - mon.size.width)/2)
+        let yTarget = enemyBase.position.y - mon.size.height
+        let moveBottomLeft = SKAction.moveTo(CGPoint(x: xTarget, y: yTarget), duration:5.0)
         mon.runAction(moveBottomLeft)
     }
     
