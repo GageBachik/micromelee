@@ -9,6 +9,9 @@
 import SpriteKit
 
 class MeleeScene: SKScene {
+    
+    var selectedCard:String = ""
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         let sSize = floor((size.height*1.00)/20)
@@ -24,7 +27,17 @@ class MeleeScene: SKScene {
             sprite.position = CGPoint(x: xPos, y: yPos)
             addChild(sprite)
         }
+        
+        let card = SKSpriteNode()
+        card.size = CGSizeMake(sSize*5, sSize*7)
+        card.color = .blackColor()
+        card.anchorPoint = CGPoint(x: 0,y: 0)
+        card.name = "Nigga"
+        card.position = CGPoint(x: 560, y: 230)
+        addChild(card)
+        
     }
+    
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
@@ -32,7 +45,8 @@ class MeleeScene: SKScene {
             let positionInScene = touch.locationInNode(self)
             let touchedNode = self.nodeAtPoint(positionInScene)
             if let name = touchedNode.name {
-              print("name:\(name)")
+                print("name:\(name)")
+                selectedCard = name
             }
             
         }
@@ -43,7 +57,19 @@ class MeleeScene: SKScene {
             let positionInScene = touch.locationInNode(self)
             let touchedNode = self.nodeAtPoint(positionInScene)
             print("position:\(touchedNode.position)")
+            if let name = touchedNode.name {
+                if name.rangeOfString("sprite") != nil && selectedCard == "Nigga"{
+                    let monster = SKSpriteNode()
+                    monster.size = CGSizeMake(20, 20)
+                    monster.color = .blackColor()
+                    monster.anchorPoint = CGPoint(x: 0,y: 0)
+                    monster.name = "NiggaMon"
+                    monster.position = touchedNode.position
+                    addChild(monster)
+                }
+            }
         }
+        selectedCard = ""
     }
     
     override func update(currentTime: CFTimeInterval) {
