@@ -132,6 +132,12 @@ class MeleeScene: SKScene {
         manaBar.runAction(SKAction.repeatActionForever(SKAction.sequence([manaTimer, manaSizeChange])))
     }
     
+    func spawnMonster(mon:SKSpriteNode){
+        let enemyBase = self.childNodeWithName("EnemyBase") as! SKSpriteNode
+        let moveBottomLeft = SKAction.moveTo(enemyBase.position, duration:5.0)
+        mon.runAction(moveBottomLeft)
+    }
+    
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
@@ -165,6 +171,7 @@ class MeleeScene: SKScene {
                                     let newVal = Int(manaLabel.text!)! - cost
                                     manaLabel.text = "\(newVal)"
                                     addChild(monster)
+                                    spawnMonster(monster)
                                     drawCard()
                                 } else if selectedCard!.type == "spell" {
                                     let spell = selectedCard!.spellAction!(size: CGSizeMake(sSize, sSize), position: touchedNode.position)
