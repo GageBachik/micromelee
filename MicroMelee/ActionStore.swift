@@ -44,9 +44,37 @@ class Monster: SKSpriteNode {
     }
 }
 
+class Spell: SKSpriteNode {
+    let hp: Int
+    
+    init(hp: Int) {
+        self.hp = hp
+        
+        super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(0, 0))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class Structure: SKSpriteNode {
+    let hp: Int
+    
+    init(hp: Int) {
+        self.hp = hp
+        
+        super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(0, 0))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 
 func PlebAction (size: CGSize, position: CGPoint) -> Monster {
-    print("Played Pleb. size:\(size) pos:\(position)")
+    print("Played Pleb.")
     let sprite = Monster(hp: 15, atk: 2, vis: 8, range: 1)
     sprite.size = size
     sprite.position = position
@@ -89,9 +117,9 @@ func BossManAction (size: CGSize, position: CGPoint) -> Monster {
     return sprite
 }
 
-func RallyAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
+func RallyAction (size: CGSize, position: CGPoint) -> Spell {
     print("Played Rally.")
-    let sprite = SKSpriteNode()
+    let sprite = Spell(hp: 10)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -100,9 +128,9 @@ func RallyAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     return sprite
 }
 
-func ShieldAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
+func ShieldAction (size: CGSize, position: CGPoint) -> Spell {
     print("Played Shield.")
-    let sprite = SKSpriteNode()
+    let sprite = Spell(hp: 20)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -111,9 +139,9 @@ func ShieldAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     return sprite
 }
 
-func BombAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
+func BombAction (size: CGSize, position: CGPoint) -> Spell {
     print("Played Bomb.")
-    let sprite = SKSpriteNode()
+    let sprite = Spell(hp: 30)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -122,9 +150,9 @@ func BombAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     return sprite
 }
 
-func DecoyAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
+func DecoyAction (size: CGSize, position: CGPoint) -> Structure {
     print("Played Decoy.")
-    let sprite = SKSpriteNode()
+    let sprite = Structure(hp: 40)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -133,9 +161,9 @@ func DecoyAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     return sprite
 }
 
-func TurretAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
+func TurretAction (size: CGSize, position: CGPoint) -> Structure {
     print("Played Turret.")
-    let sprite = SKSpriteNode()
+    let sprite = Structure(hp: 60)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -144,9 +172,9 @@ func TurretAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
     return sprite
 }
 
-func PlebFactoryAction (size: CGSize, position: CGPoint) -> SKSpriteNode {
+func PlebFactoryAction (size: CGSize, position: CGPoint) -> Structure {
     print("Played Pleb Factory.")
-    let sprite = SKSpriteNode()
+    let sprite = Structure(hp: 120)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)

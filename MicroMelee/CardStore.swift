@@ -14,20 +14,24 @@ class Card: SKSpriteNode {
     let type: String
     let effect: String
     let cost: Int
-    var action: ((size: CGSize, position: CGPoint) -> (SKSpriteNode))?
     var monsterAction: ((size: CGSize, position: CGPoint) -> (Monster))?
+    var spellAction: ((size: CGSize, position: CGPoint) -> (Spell))?
+    var structureAction: ((size: CGSize, position: CGPoint) -> (Structure))?
     
-    init(id: Int, name: String, type: String, effect: String, cost: Int, action: ((size: CGSize, position: CGPoint) -> (SKSpriteNode))?=nil, monsterAction: ((size: CGSize, position: CGPoint) -> (Monster))?=nil) {
+    init(id: Int, name: String, type: String, effect: String, cost: Int, monsterAction: ((size: CGSize, position: CGPoint) -> (Monster))?=nil, spellAction: ((size: CGSize, position: CGPoint) -> (Spell))?=nil, structureAction: ((size: CGSize, position: CGPoint) -> (Structure))?=nil) {
         self.id = id
         self.type = type
         self.effect = effect
         self.cost = cost
         super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(0, 0))
-        if let sAction = action {
-            self.action = sAction
-        }
         if let mAction = monsterAction {
             self.monsterAction = mAction
+        }
+        if let sAction = spellAction {
+            self.spellAction = sAction
+        }
+        if let tAction = structureAction {
+            self.structureAction = tAction
         }
         self.name = name
     }
@@ -37,7 +41,7 @@ class Card: SKSpriteNode {
     }
     
     override func copyWithZone(zone: NSZone) -> AnyObject {
-        let copy = Card(id: id, name: name!, type: type, effect: effect, cost: cost, action: action, monsterAction: monsterAction)
+        let copy = Card(id: id, name: name!, type: type, effect: effect, cost: cost, monsterAction: monsterAction, spellAction: spellAction, structureAction: structureAction)
         return copy
     }
 }
@@ -94,7 +98,7 @@ let Rally = Card(
     type: "spell",
     effect: "Place a rally point to direct your warriors",
     cost: 10,
-    action: RallyAction
+    spellAction: RallyAction
 )
 
 let Shield = Card(
@@ -103,7 +107,7 @@ let Shield = Card(
     type: "spell",
     effect: "Give a character or structure a small hp shield.",
     cost: 20,
-    action: ShieldAction
+    spellAction: ShieldAction
 )
 
 let Bomb = Card(
@@ -112,7 +116,7 @@ let Bomb = Card(
     type: "spell",
     effect: "Deal moderate damage in a small radius.",
     cost: 30,
-    action: BombAction
+    spellAction: BombAction
 )
 
 let Decoy = Card(
@@ -121,7 +125,7 @@ let Decoy = Card(
     type: "structure",
     effect: "Place a decoy that distracts enemy warriors.",
     cost: 30,
-    action: DecoyAction
+    structureAction: DecoyAction
 )
 
 let Turret = Card(
@@ -130,7 +134,7 @@ let Turret = Card(
     type: "structure",
     effect: "Place a ranged turret to defend a small area",
     cost: 40,
-    action: TurretAction
+    structureAction: TurretAction
 )
 
 let PlebFactory = Card(
@@ -139,7 +143,7 @@ let PlebFactory = Card(
     type: "structure",
     effect: "A structure that produces 1 Pleb every 5 seconds.",
     cost: 160,
-    action: PlebFactoryAction
+    structureAction: PlebFactoryAction
 )
 
 var CardCollection: Array<Card> = [

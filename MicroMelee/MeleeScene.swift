@@ -140,7 +140,6 @@ class MeleeScene: SKScene {
                             if manaBar.size.height > manaCost {
                                 if selectedCard!.type == "monster" {
                                     let monster = selectedCard!.monsterAction!(size: CGSizeMake(sSize, sSize), position: touchedNode.position)
-                                    print("monster: \(monster)")
                                     print("hp: \(monster.hp) atk: \(monster.atk)")
                                     manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - cost
@@ -148,16 +147,16 @@ class MeleeScene: SKScene {
                                     addChild(monster)
                                     drawCard()
                                 } else if selectedCard!.type == "spell" {
-                                    let spell = selectedCard!.action!(size: CGSizeMake(sSize, sSize), position: touchedNode.position)
-                                    print("spell: \(spell)")
+                                    let spell = selectedCard!.spellAction!(size: CGSizeMake(sSize, sSize), position: touchedNode.position)
+                                    print("hp: \(spell.hp)")
                                     manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - cost
                                     manaLabel.text = "\(newVal)"
                                     addChild(spell)
                                     drawCard()
                                 }else if selectedCard!.type == "structure" {
-                                    let structure = selectedCard!.action!(size: CGSizeMake(sSize, sSize), position: touchedNode.position)
-                                    print("structure: \(structure)")
+                                    let structure = selectedCard!.structureAction!(size: CGSizeMake(sSize, sSize), position: touchedNode.position)
+                                    print("hp: \(structure.hp)")
                                     manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - cost  
                                     manaLabel.text = "\(newVal)"
