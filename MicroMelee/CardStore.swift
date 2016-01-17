@@ -161,7 +161,7 @@ func generateCard(cardId: Int, cardSize: CGSize, cardPosition: CGPoint) -> Card 
         blue: range*3,
         alpha: 1
     )
-    print("Name: \(card.name!) Color: \(card.color)")
+//    print("Name: \(card.name!) Color: \(card.color)")
     card.anchorPoint = CGPoint(x: 0, y: 0)
     return card
 }

@@ -152,7 +152,7 @@ class MeleeScene: SKScene {
                                 }else if selectedCard!.type == "structure" {
                                     selectedCard!.action(size: CGSizeMake(20, 20), position: touchedNode.position)
                                     manaBar.size.height -= manaCost
-                                    let newVal = Int(manaLabel.text!)! - cost
+                                    let newVal = Int(manaLabel.text!)! - cost  
                                     manaLabel.text = "\(newVal)"
                                     drawCard()
                                 }
