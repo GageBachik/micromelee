@@ -25,12 +25,14 @@ import SpriteKit
 //}
 
 class Monster: SKSpriteNode {
+    let team: Int
     let hp: Int
     let atk: Int
     let vis: Int
     let range: Int
     
-    init(hp: Int, atk: Int, vis: Int, range: Int) {
+    init(team: Int, hp: Int, atk: Int, vis: Int, range: Int) {
+        self.team = team
         self.hp = hp
         self.atk = atk
         self.vis = vis
@@ -45,9 +47,11 @@ class Monster: SKSpriteNode {
 }
 
 class Spell: SKSpriteNode {
+    let team: Int
     let hp: Int
     
-    init(hp: Int) {
+    init(team: Int, hp: Int) {
+        self.team = team
         self.hp = hp
         
         super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(0, 0))
@@ -59,9 +63,11 @@ class Spell: SKSpriteNode {
 }
 
 class Structure: SKSpriteNode {
+    let team: Int
     let hp: Int
     
-    init(hp: Int) {
+    init(team: Int, hp: Int) {
+        self.team = team
         self.hp = hp
         
         super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(0, 0))
@@ -75,7 +81,7 @@ class Structure: SKSpriteNode {
 
 func PlebAction (size: CGSize, position: CGPoint) -> Monster {
     print("Played Pleb.")
-    let sprite = Monster(hp: 15, atk: 2, vis: 8, range: 1)
+    let sprite = Monster(team: 0, hp: 15, atk: 2, vis: 8, range: 1)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -86,7 +92,7 @@ func PlebAction (size: CGSize, position: CGPoint) -> Monster {
 
 func RangerAction (size: CGSize, position: CGPoint) -> Monster {
     print("Played Ranger.")
-    let sprite = Monster(hp: 10, atk: 3, vis: 8, range: 6)
+    let sprite = Monster(team: 0, hp: 10, atk: 3, vis: 8, range: 6)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -97,7 +103,7 @@ func RangerAction (size: CGSize, position: CGPoint) -> Monster {
 
 func FighterAction (size: CGSize, position: CGPoint) -> Monster {
     print("Played Fighter.")
-    let sprite = Monster(hp: 30, atk: 5, vis: 6, range: 1)
+    let sprite = Monster(team: 0, hp: 30, atk: 5, vis: 6, range: 1)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -108,7 +114,7 @@ func FighterAction (size: CGSize, position: CGPoint) -> Monster {
 
 func BossManAction (size: CGSize, position: CGPoint) -> Monster {
     print("Played BossMan.")
-    let sprite = Monster(hp: 60, atk: 12, vis: 4, range: 3)
+    let sprite = Monster(team: 0, hp: 60, atk: 12, vis: 4, range: 3)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -119,7 +125,7 @@ func BossManAction (size: CGSize, position: CGPoint) -> Monster {
 
 func RallyAction (size: CGSize, position: CGPoint) -> Spell {
     print("Played Rally.")
-    let sprite = Spell(hp: 10)
+    let sprite = Spell(team: 0, hp: 10)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -130,7 +136,7 @@ func RallyAction (size: CGSize, position: CGPoint) -> Spell {
 
 func ShieldAction (size: CGSize, position: CGPoint) -> Spell {
     print("Played Shield.")
-    let sprite = Spell(hp: 20)
+    let sprite = Spell(team: 0, hp: 20)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -141,7 +147,7 @@ func ShieldAction (size: CGSize, position: CGPoint) -> Spell {
 
 func BombAction (size: CGSize, position: CGPoint) -> Spell {
     print("Played Bomb.")
-    let sprite = Spell(hp: 30)
+    let sprite = Spell(team: 0, hp: 30)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -152,7 +158,7 @@ func BombAction (size: CGSize, position: CGPoint) -> Spell {
 
 func DecoyAction (size: CGSize, position: CGPoint) -> Structure {
     print("Played Decoy.")
-    let sprite = Structure(hp: 40)
+    let sprite = Structure(team: 0, hp: 40)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -163,7 +169,7 @@ func DecoyAction (size: CGSize, position: CGPoint) -> Structure {
 
 func TurretAction (size: CGSize, position: CGPoint) -> Structure {
     print("Played Turret.")
-    let sprite = Structure(hp: 60)
+    let sprite = Structure(team: 0, hp: 60)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -174,7 +180,7 @@ func TurretAction (size: CGSize, position: CGPoint) -> Structure {
 
 func PlebFactoryAction (size: CGSize, position: CGPoint) -> Structure {
     print("Played Pleb Factory.")
-    let sprite = Structure(hp: 120)
+    let sprite = Structure(team: 0, hp: 120)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
