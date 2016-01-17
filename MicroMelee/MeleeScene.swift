@@ -37,7 +37,7 @@ class MeleeScene: SKScene {
     var selectedCard = SKSpriteNode()
     var manaBar = SKSpriteNode()
     var manaLabel = SKLabelNode()
-    var deck = [0,0,0,0,0,0,0,1,1,1,1,1,1,1,2,2,2,2,3,3].shuffle()
+    var deck = [0,0,0,0,9,8,8,1,1,1,1,2,2,3,4,5,6,6,7,7].shuffle()
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -57,10 +57,18 @@ class MeleeScene: SKScene {
         
         let cardXPos = 2*offset + 30*sSize
         let cSize = sSize*4
-        generateCard(self.deck.removeFirst(), cardSize: CGSizeMake(cSize, cSize), cardPosition: CGPoint(x: cardXPos, y: offset))
-        generateCard(self.deck.removeFirst(), cardSize: CGSizeMake(cSize, cSize), cardPosition: CGPoint(x: cardXPos, y: cSize + 2*offset))
-        generateCard(self.deck.removeFirst(), cardSize: CGSizeMake(cSize, cSize), cardPosition: CGPoint(x: cardXPos, y: 2*cSize + 3*offset))
-        generateCard(self.deck.removeFirst(), cardSize: CGSizeMake(cSize, cSize), cardPosition: CGPoint(x: cardXPos, y: 3*cSize + 4*offset))
+        let card0 = generateCard(self.deck.removeFirst(), cardSize: CGSizeMake(cSize, cSize), cardPosition: CGPoint(x: cardXPos, y: offset))
+        let card1 = generateCard(self.deck.removeFirst(), cardSize: CGSizeMake(cSize, cSize), cardPosition: CGPoint(x: cardXPos, y: cSize + 2*offset))
+        let card2 = generateCard(self.deck.removeFirst(), cardSize: CGSizeMake(cSize, cSize), cardPosition: CGPoint(x: cardXPos, y: 2*cSize + 3*offset))
+        let card3 = generateCard(self.deck.removeFirst(), cardSize: CGSizeMake(cSize, cSize), cardPosition: CGPoint(x: cardXPos, y: 3*cSize + 4*offset))
+        print("card: \(card0)")
+        print("card: \(card1)")
+        print("card: \(card2)")
+        print("card: \(card3)")
+        addChild(card0)
+        addChild(card1)
+        addChild(card2)
+        addChild(card3)
         
         let maxManaHeight = size.height - offset*2
         manaBar.size = CGSizeMake(offset*2, maxManaHeight/10)
@@ -96,47 +104,11 @@ class MeleeScene: SKScene {
         manaBar.runAction(SKAction.repeatActionForever(SKAction.sequence([manaTimer, manaSizeChange])))
     }
     
-    func generateCard(cardType: Int, cardSize: CGSize?=nil, cardPosition: CGPoint?=nil){
-        if cardType == 1 {
-            let card1 = SKSpriteNode()
-            card1.size = cardSize ?? selectedCard.size
-            card1.color = .blackColor()
-            card1.anchorPoint = CGPoint(x: 0,y: 0)
-            card1.name = "Nigga"
-            card1.position = cardPosition ?? selectedCard.position
-            addChild(card1)
-        }else if cardType == 2 {
-            let card2 = SKSpriteNode()
-            card2.size = cardSize ?? selectedCard.size
-            card2.color = .whiteColor()
-            card2.anchorPoint = CGPoint(x: 0,y: 0)
-            card2.name = "White"
-            card2.position = cardPosition ?? selectedCard.position
-            addChild(card2)
-        }else if cardType == 3{
-            let card3 = SKSpriteNode()
-            card3.size = cardSize ?? selectedCard.size
-            card3.color = .greenColor()
-            card3.anchorPoint = CGPoint(x: 0,y: 0)
-            card3.name = "Green"
-            card3.position = cardPosition ?? selectedCard.position
-            addChild(card3)
-        }else if cardType == 4{
-            let card4 = SKSpriteNode()
-            card4.size = cardSize ?? selectedCard.size
-            card4.color = .yellowColor()
-            card4.anchorPoint = CGPoint(x: 0,y: 0)
-            card4.name = "Yellow"
-            card4.position = cardPosition ?? selectedCard.position
-            addChild(card4)
-        }
-    }
-    
     func drawCard(){
         selectedCard.removeFromParent()
         if (deck.isEmpty == false){
             let newCard = deck.removeFirst()
-            generateCard(newCard)
+            generateCard(newCard, cardSize: selectedCard.size, cardPosition: selectedCard.position)
         }
     }
     

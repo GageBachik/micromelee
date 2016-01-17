@@ -18,6 +18,8 @@
 		23E8D5AB1C4B0CB600C8F89F /* MicroMeleeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E8D5AA1C4B0CB600C8F89F /* MicroMeleeUITests.swift */; };
 		23E8D5B91C4B3B0200C8F89F /* MeleeScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 23E8D5B81C4B3B0200C8F89F /* MeleeScene.sks */; };
 		73E75A481C4B0FE700C95610 /* MeleeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E75A471C4B0FE700C95610 /* MeleeScene.swift */; };
+		73E75A4E1C4B730600C95610 /* ActionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E75A4D1C4B730600C95610 /* ActionStore.swift */; };
+		73E75A501C4B754600C95610 /* CardStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E75A4F1C4B754600C95610 /* CardStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		23E8D5AC1C4B0CB600C8F89F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23E8D5B81C4B3B0200C8F89F /* MeleeScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MeleeScene.sks; sourceTree = "<group>"; };
 		73E75A471C4B0FE700C95610 /* MeleeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeleeScene.swift; sourceTree = "<group>"; };
+		73E75A4D1C4B730600C95610 /* ActionStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionStore.swift; sourceTree = "<group>"; };
+		73E75A4F1C4B754600C95610 /* CardStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,8 @@
 				23E8D5961C4B0CB600C8F89F /* Info.plist */,
 				73E75A471C4B0FE700C95610 /* MeleeScene.swift */,
 				23E8D5B81C4B3B0200C8F89F /* MeleeScene.sks */,
+				73E75A4D1C4B730600C95610 /* ActionStore.swift */,
+				73E75A4F1C4B754600C95610 /* CardStore.swift */,
 			);
 			path = MicroMelee;
 			sourceTree = "<group>";
@@ -273,6 +279,8 @@
 			files = (
 				23E8D58B1C4B0CB600C8F89F /* GameScene.swift in Sources */,
 				73E75A481C4B0FE700C95610 /* MeleeScene.swift in Sources */,
+				73E75A4E1C4B730600C95610 /* ActionStore.swift in Sources */,
+				73E75A501C4B754600C95610 /* CardStore.swift in Sources */,
 				23E8D58D1C4B0CB600C8F89F /* GameViewController.swift in Sources */,
 				23E8D5871C4B0CB600C8F89F /* AppDelegate.swift in Sources */,
 			);
