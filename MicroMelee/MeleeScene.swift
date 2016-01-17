@@ -11,23 +11,28 @@ import SpriteKit
 class MeleeScene: SKScene {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        print("size: \(size.height), \(size.width)")
-        for i in 0...399 {
-            print("loop number: \(i)")
+        let sSize = floor((size.height*1.00)/20)
+        let offset = (size.height-(sSize*20))/2
+        for i in 0...599 {
             let sprite = SKSpriteNode()
-            let sSize = floor((size.height*0.96)/20)
             sprite.size = CGSizeMake(sSize, sSize)
-            sprite.color = .blackColor()
-            let xPos = Int(sSize)*((i%20))
-            let yPos = Int(sSize)*((i)/20)
+            sprite.color = .redColor()
+            sprite.name = "sprite\(i)"
+            sprite.anchorPoint = CGPoint(x:0,y:0)
+            let xPos = (Int(sSize)*((i%30)))+Int(offset)
+            let yPos = (Int(sSize)*((i)/30))+Int(offset)
             sprite.position = CGPoint(x: xPos, y: yPos)
-            print("position: \(sprite.size)")
             addChild(sprite)
         }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
+        for touch in touches{
+            let positionInScene = touch.locationInNode(self)
+            let touchedNode = self.nodeAtPoint(positionInScene)
+            print("name:\(touchedNode.name), position:\(touchedNode.position)")
+        }
     }
     
     override func update(currentTime: CFTimeInterval) {
