@@ -29,11 +29,11 @@ class MeleeScene: SKScene {
         }
         
         let card = SKSpriteNode()
-        card.size = CGSizeMake(sSize*5, sSize*7)
+        card.size = CGSizeMake(sSize*5, sSize*5)
         card.color = .blackColor()
         card.anchorPoint = CGPoint(x: 0,y: 0)
         card.name = "Nigga"
-        card.position = CGPoint(x: 560, y: 230)
+        card.position = CGPoint(x: size.width - sSize*5 - 7, y: size.height - sSize*5 - 7)
         addChild(card)
         
     }
@@ -58,14 +58,18 @@ class MeleeScene: SKScene {
             let touchedNode = self.nodeAtPoint(positionInScene)
             print("position:\(touchedNode.position)")
             if let name = touchedNode.name {
-                if name.rangeOfString("sprite") != nil && selectedCard == "Nigga"{
-                    let monster = SKSpriteNode()
-                    monster.size = CGSizeMake(20, 20)
-                    monster.color = .blackColor()
-                    monster.anchorPoint = CGPoint(x: 0,y: 0)
-                    monster.name = "NiggaMon"
-                    monster.position = touchedNode.position
-                    addChild(monster)
+                if name.rangeOfString("sprite") != nil && selectedCard == "Nigga" {
+                    let id = name.substringFromIndex(name.startIndex.advancedBy(6))
+                    print("id: \(id)")
+                    if Int(id) <= 299 {
+                        let monster = SKSpriteNode()
+                        monster.size = CGSizeMake(20, 20)
+                        monster.color = .blackColor()
+                        monster.anchorPoint = CGPoint(x: 0,y: 0)
+                        monster.name = "NiggaMon"
+                        monster.position = touchedNode.position
+                        addChild(monster)
+                    }
                 }
             }
         }
