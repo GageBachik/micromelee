@@ -153,13 +153,15 @@ func generateCard(cardId: Int, cardSize: CGSize, cardPosition: CGPoint) -> Card 
     let card = CardCollection[cardId].copy() as! Card
     card.size = cardSize
     card.position = cardPosition
-//    card.color = UIColor(
-//        red: CGFloat((cardId + 5) * cardId),
-//        green: CGFloat((cardId + 5) * cardId),
-//        blue: CGFloat((cardId + 5) * cardId),
-//        alpha: 1
-//    )
-    card.color = .whiteColor()
+    let cIdFloated = CGFloat(cardId)
+    let range = ((((cIdFloated+1 * cIdFloated) / 100) * 255) / 100)
+    card.color = UIColor(
+        red: range,
+        green: range*2,
+        blue: range*3,
+        alpha: 1
+    )
+    print("Name: \(card.name!) Color: \(card.color)")
     card.anchorPoint = CGPoint(x: 0, y: 0)
     return card
 }
