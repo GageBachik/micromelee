@@ -24,6 +24,7 @@ class Card: SKSpriteNode {
         self.effect = effect
         self.cost = cost
         super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(0, 0))
+        /* Optional class keys have to be declared after super.init */
         if let mAction = monsterAction {
             self.monsterAction = mAction
         }
@@ -45,6 +46,26 @@ class Card: SKSpriteNode {
         return copy
     }
 }
+
+/* Card Functions */
+
+func generateCard(cardId: Int, cardSize: CGSize, cardPosition: CGPoint) -> Card {
+    let card = CardCollection[cardId].copy() as! Card
+    card.size = cardSize
+    card.position = cardPosition
+    let cIdFloated = CGFloat(cardId)
+    let range = ((((cIdFloated+1 * cIdFloated) / 100) * 255) / 100)
+    card.color = UIColor(
+        red: range,
+        green: range*2,
+        blue: range*3,
+        alpha: 1
+    )
+    card.anchorPoint = CGPoint(x: 0, y: 0)
+    return card
+}
+
+/* List of all cards in our Collection */
 
 // Template for new Cards
 //
@@ -158,21 +179,4 @@ var CardCollection: Array<Card> = [
     Turret,
     PlebFactory
 ]
-
-func generateCard(cardId: Int, cardSize: CGSize, cardPosition: CGPoint) -> Card {
-    let card = CardCollection[cardId].copy() as! Card
-    card.size = cardSize
-    card.position = cardPosition
-    let cIdFloated = CGFloat(cardId)
-    let range = ((((cIdFloated+1 * cIdFloated) / 100) * 255) / 100)
-    card.color = UIColor(
-        red: range,
-        green: range*2,
-        blue: range*3,
-        alpha: 1
-    )
-//    print("Name: \(card.name!) Color: \(card.color)")
-    card.anchorPoint = CGPoint(x: 0, y: 0)
-    return card
-}
 

@@ -9,20 +9,7 @@
 import Foundation
 import SpriteKit
 
-//let monster = SKSpriteNode()
-//monster.size = CGSizeMake(20, 20)
-//monster.color = .blackColor()
-//monster.anchorPoint = CGPoint(x: 0,y: 0)
-//monster.name = "NiggaMon"
-//monster.position = touchedNode.position
-//let cost = 20*ppm
-//if manaBar.size.height > cost {
-//    addChild(monster)
-//    manaBar.size.height -= cost
-//    let newVal = Int(manaLabel.text!)! - 20
-//    manaLabel.text = "\(newVal)"
-//    drawCard()
-//}
+/* Our game board sprite classes */
 
 class Monster: SKSpriteNode {
     let team: Int
@@ -78,6 +65,7 @@ class Building: SKSpriteNode {
     }
 }
 
+/* Custom Functions for each card in the game */
 
 func PlebAction (size: CGSize, position: CGPoint) -> Monster {
     print("Played Pleb.")

@@ -34,14 +34,25 @@ extension MutableCollectionType where Index == Int {
 
 class MeleeScene: SKScene {
     
+    /* Global Variables and Deck */
     var selectedCard: Card?
     var manaBar = SKSpriteNode()
     var manaLabel = SKLabelNode()
     var deck = [0,0,0,0,9,8,8,1,1,1,1,2,2,3,4,5,6,6,7,7].shuffle()
     var sSize = CGFloat()
     
+    /* Game Functions */
+    func drawCard(){
+        selectedCard!.removeFromParent()
+        if (deck.isEmpty == false){
+            let newCardId = deck.removeFirst()
+            let newCard = generateCard(newCardId, cardSize: selectedCard!.size, cardPosition: selectedCard!.position)
+            addChild(newCard)
+        }
+    }
+    
     override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
+        /* Creates Game Board */
         sSize = floor((size.height*1.00)/20)
         let offset = (size.height-(sSize*20))/2
         for i in 0...599 {
@@ -56,21 +67,36 @@ class MeleeScene: SKScene {
             addChild(sprite)
         }
         
+        /* Adds Both Bases */
+        let enemyBase = Building(team: 1, hp: 100)
+        enemyBase.size = CGSizeMake(sSize*2, sSize*2)
+        enemyBase.anchorPoint = CGPoint(x:0, y:0)
+        enemyBase.color = .greenColor()
+        enemyBase.name = "EnemyBase"
+        enemyBase.position = CGPoint(x: offset + 14*sSize, y: size.height - offset - 2*sSize)
+        addChild(enemyBase)
+        
+        let myBase = Building(team: 0, hp: 100)
+        myBase.size = CGSizeMake(sSize*2, sSize*2)
+        myBase.anchorPoint = CGPoint(x:0, y:0)
+        myBase.color = .purpleColor()
+        myBase.name = "MyBase"
+        myBase.position = CGPoint(x: offset + 14*sSize, y: offset)
+        addChild(myBase)
+        
+        /* Generates the first four cards of your deck */
         let cardXPos = 2*offset + 30*sSize
         let cSize = sSize*4
         let card0 = generateCard(self.deck.removeFirst(), cardSize: CGSizeMake(cSize, cSize), cardPosition: CGPoint(x: cardXPos, y: offset))
         let card1 = generateCard(self.deck.removeFirst(), cardSize: CGSizeMake(cSize, cSize), cardPosition: CGPoint(x: cardXPos, y: cSize + 2*offset))
         let card2 = generateCard(self.deck.removeFirst(), cardSize: CGSizeMake(cSize, cSize), cardPosition: CGPoint(x: cardXPos, y: 2*cSize + 3*offset))
         let card3 = generateCard(self.deck.removeFirst(), cardSize: CGSizeMake(cSize, cSize), cardPosition: CGPoint(x: cardXPos, y: 3*cSize + 4*offset))
-        print("card: \(card0)")
-        print("card: \(card1)")
-        print("card: \(card2)")
-        print("card: \(card3)")
         addChild(card0)
         addChild(card1)
         addChild(card2)
         addChild(card3)
         
+        /* Creates the Mana components */
         let maxManaHeight = size.height - offset*2
         manaBar.size = CGSizeMake(offset*2, maxManaHeight/10)
         manaBar.color = .blueColor()
@@ -87,6 +113,7 @@ class MeleeScene: SKScene {
         manaLabel.position = CGPoint(x: cardXPos, y: size.height - offset)
         addChild(manaLabel)
         
+        /* Updates Mana over time */
         let manaTimer = SKAction.waitForDuration(1)
         let manaSizeChange = SKAction.runBlock {
             if self.manaBar.size.height < maxManaHeight {
@@ -103,15 +130,6 @@ class MeleeScene: SKScene {
             }
         }
         manaBar.runAction(SKAction.repeatActionForever(SKAction.sequence([manaTimer, manaSizeChange])))
-    }
-    
-    func drawCard(){
-        selectedCard!.removeFromParent()
-        if (deck.isEmpty == false){
-            let newCardId = deck.removeFirst()
-            let newCard = generateCard(newCardId, cardSize: selectedCard!.size, cardPosition: selectedCard!.position)
-            addChild(newCard)
-        }
     }
     
     
@@ -134,6 +152,8 @@ class MeleeScene: SKScene {
                 if name.rangeOfString("sprite") != nil {
                     let id = name.substringFromIndex(name.startIndex.advancedBy(6))
                     if Int(id) <= 299 {
+                        
+                        /* Calls the card function when played on the board */
                         if let cost = selectedCard?.cost {
                             let ppm = self.manaBar.size.height / CGFloat(Float(self.manaLabel.text!)!)
                             let manaCost = CGFloat(cost) * ppm
@@ -165,17 +185,34 @@ class MeleeScene: SKScene {
                                 }
                             }
                         }
+                        
                     }
                 }else {
+                    /* Deals damage to sprites on click */
                     if let monster = touchedNode as? Monster {
-                        print("Monster: \(monster)")
-                        print("Monster HP: \(monster.hp)")
-                        monster.hp -= 5
-                        print("New Monster HP: \(monster.hp)")
+                        if monster.hp > 5 {
+                            monster.hp -= 5
+                            print("New Monster HP: \(monster.hp)")
+                        } else {
+                            monster.removeFromParent()
+                            print("\(monster.name) destroyed.")
+                        }
                     }else if let spell = touchedNode as? Spell {
-                        print("Spell: \(spell)")
+                        if spell.hp > 5 {
+                            spell.hp -= 5
+                            print("New Spell HP: \(spell.hp)")
+                        } else {
+                            spell.removeFromParent()
+                            print("\(spell.name) destroyed.")
+                        }
                     }else if let building = touchedNode as? Building {
-                        print("Structure: \(building)")
+                        if building.hp > 5 {
+                            building.hp -= 5
+                            print("New Building HP: \(building.hp)")
+                        } else {
+                            building.removeFromParent()
+                            print("\(building.name) destroyed.")
+                        }
                     }
                 }
             }
