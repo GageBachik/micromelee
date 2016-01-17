@@ -38,10 +38,11 @@ class MeleeScene: SKScene {
     var manaBar = SKSpriteNode()
     var manaLabel = SKLabelNode()
     var deck = [0,0,0,0,9,8,8,1,1,1,1,2,2,3,4,5,6,6,7,7].shuffle()
+    var sSize = CGFloat()
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        let sSize = floor((size.height*1.00)/20)
+        sSize = floor((size.height*1.00)/20)
         let offset = (size.height-(sSize*20))/2
         for i in 0...599 {
             let sprite = SKSpriteNode()
@@ -138,7 +139,7 @@ class MeleeScene: SKScene {
                             let manaCost = CGFloat(cost) * ppm
                             if manaBar.size.height > manaCost {
                                 if selectedCard!.type == "monster" {
-                                    let monster = selectedCard!.action(size: CGSizeMake(20, 20), position: touchedNode.position)
+                                    let monster = selectedCard!.action(size: CGSizeMake(sSize, sSize), position: touchedNode.position)
                                     print("monster: \(monster)")
                                     manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - cost
@@ -146,7 +147,7 @@ class MeleeScene: SKScene {
                                     addChild(monster)
                                     drawCard()
                                 } else if selectedCard!.type == "spell" {
-                                    let spell = selectedCard!.action(size: CGSizeMake(20, 20), position: touchedNode.position)
+                                    let spell = selectedCard!.action(size: CGSizeMake(sSize, sSize), position: touchedNode.position)
                                     print("spell: \(spell)")
                                     manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - cost
@@ -154,7 +155,7 @@ class MeleeScene: SKScene {
                                     addChild(spell)
                                     drawCard()
                                 }else if selectedCard!.type == "structure" {
-                                    let structure = selectedCard!.action(size: CGSizeMake(20, 20), position: touchedNode.position)
+                                    let structure = selectedCard!.action(size: CGSizeMake(sSize, sSize), position: touchedNode.position)
                                     print("structure: \(structure)")
                                     manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - cost  
