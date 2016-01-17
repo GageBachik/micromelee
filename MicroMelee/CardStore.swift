@@ -16,9 +16,9 @@ class Card: SKSpriteNode {
     let cost: Int
     var monsterAction: ((size: CGSize, position: CGPoint) -> (Monster))?
     var spellAction: ((size: CGSize, position: CGPoint) -> (Spell))?
-    var structureAction: ((size: CGSize, position: CGPoint) -> (Structure))?
+    var structureAction: ((size: CGSize, position: CGPoint) -> (Building))?
     
-    init(id: Int, name: String, type: String, effect: String, cost: Int, monsterAction: ((size: CGSize, position: CGPoint) -> (Monster))?=nil, spellAction: ((size: CGSize, position: CGPoint) -> (Spell))?=nil, structureAction: ((size: CGSize, position: CGPoint) -> (Structure))?=nil) {
+    init(id: Int, name: String, type: String, effect: String, cost: Int, monsterAction: ((size: CGSize, position: CGPoint) -> (Monster))?=nil, spellAction: ((size: CGSize, position: CGPoint) -> (Spell))?=nil, structureAction: ((size: CGSize, position: CGPoint) -> (Building))?=nil) {
         self.id = id
         self.type = type
         self.effect = effect

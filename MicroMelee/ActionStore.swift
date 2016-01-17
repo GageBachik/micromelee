@@ -26,10 +26,10 @@ import SpriteKit
 
 class Monster: SKSpriteNode {
     let team: Int
-    let hp: Int
-    let atk: Int
-    let vis: Int
-    let range: Int
+    var hp: Int
+    var atk: Int
+    var vis: Int
+    var range: Int
     
     init(team: Int, hp: Int, atk: Int, vis: Int, range: Int) {
         self.team = team
@@ -48,7 +48,7 @@ class Monster: SKSpriteNode {
 
 class Spell: SKSpriteNode {
     let team: Int
-    let hp: Int
+    var hp: Int
     
     init(team: Int, hp: Int) {
         self.team = team
@@ -62,9 +62,9 @@ class Spell: SKSpriteNode {
     }
 }
 
-class Structure: SKSpriteNode {
+class Building: SKSpriteNode {
     let team: Int
-    let hp: Int
+    var hp: Int
     
     init(team: Int, hp: Int) {
         self.team = team
@@ -156,9 +156,9 @@ func BombAction (size: CGSize, position: CGPoint) -> Spell {
     return sprite
 }
 
-func DecoyAction (size: CGSize, position: CGPoint) -> Structure {
+func DecoyAction (size: CGSize, position: CGPoint) -> Building {
     print("Played Decoy.")
-    let sprite = Structure(team: 0, hp: 40)
+    let sprite = Building(team: 0, hp: 40)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -167,9 +167,9 @@ func DecoyAction (size: CGSize, position: CGPoint) -> Structure {
     return sprite
 }
 
-func TurretAction (size: CGSize, position: CGPoint) -> Structure {
+func TurretAction (size: CGSize, position: CGPoint) -> Building {
     print("Played Turret.")
-    let sprite = Structure(team: 0, hp: 60)
+    let sprite = Building(team: 0, hp: 60)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)
@@ -178,9 +178,9 @@ func TurretAction (size: CGSize, position: CGPoint) -> Structure {
     return sprite
 }
 
-func PlebFactoryAction (size: CGSize, position: CGPoint) -> Structure {
+func PlebFactoryAction (size: CGSize, position: CGPoint) -> Building {
     print("Played Pleb Factory.")
-    let sprite = Structure(team: 0, hp: 120)
+    let sprite = Building(team: 0, hp: 120)
     sprite.size = size
     sprite.position = position
     sprite.anchorPoint = CGPoint(x: 0, y: 0)

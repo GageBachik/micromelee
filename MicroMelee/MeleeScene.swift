@@ -166,6 +166,17 @@ class MeleeScene: SKScene {
                             }
                         }
                     }
+                }else {
+                    if let monster = touchedNode as? Monster {
+                        print("Monster: \(monster)")
+                        print("Monster HP: \(monster.hp)")
+                        monster.hp -= 5
+                        print("New Monster HP: \(monster.hp)")
+                    }else if let spell = touchedNode as? Spell {
+                        print("Spell: \(spell)")
+                    }else if let building = touchedNode as? Building {
+                        print("Structure: \(building)")
+                    }
                 }
             }
         }
