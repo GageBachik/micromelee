@@ -32,8 +32,11 @@ extension MutableCollectionType where Index == Int {
     }
 }
 
-class MeleeScene: SKScene {
+class MeleeScene: SKScene, SKPhysicsContactDelegate {
     
+    let baseCategory: UInt32 = 0x1 << 1
+    let playerCategory: UInt32 = 0x1 << 2
+    let nothingCategory: UInt32 = 0x1 << 3
     /* Global Variables and Deck */
     var selectedCard: Card?
     var manaBar = SKSpriteNode()
@@ -52,6 +55,9 @@ class MeleeScene: SKScene {
     }
     
     override func didMoveToView(view: SKView) {
+        
+        self.physicsWorld.contactDelegate = self
+        
         /* Creates Game Board */
         sSize = floor((size.height*1.00)/20)
         let offset = (size.height-(sSize*20))/2
@@ -74,6 +80,19 @@ class MeleeScene: SKScene {
         enemyBase.color = .greenColor()
         enemyBase.name = "EnemyBase"
         enemyBase.position = CGPoint(x: offset + 14*sSize, y: size.height - offset - 2*sSize)
+        enemyBase.physicsBody = SKPhysicsBody(rectangleOfSize: enemyBase.size, center: CGPointMake((enemyBase.size.width/2), (enemyBase.size.height/2)))
+        if let physics = enemyBase.physicsBody {
+            physics.affectedByGravity = false
+            physics.allowsRotation = false
+            physics.dynamic = true
+            physics.pinned = true
+            physics.linearDamping = 0.75
+            physics.angularDamping = 0.75
+            physics.categoryBitMask = baseCategory
+            physics.contactTestBitMask = playerCategory
+            physics.collisionBitMask = playerCategory
+            
+        }
         addChild(enemyBase)
         
         let myBase = Building(team: 0, hp: 100)
@@ -82,6 +101,14 @@ class MeleeScene: SKScene {
         myBase.color = .purpleColor()
         myBase.name = "MyBase"
         myBase.position = CGPoint(x: offset + 14*sSize, y: offset)
+        myBase.physicsBody = SKPhysicsBody(rectangleOfSize: myBase.size, center: CGPointMake((myBase.size.width/2), (myBase.size.height/2)))
+        if let physics = myBase.physicsBody {
+            physics.affectedByGravity = false
+            physics.allowsRotation = false
+            physics.dynamic = false
+            physics.linearDamping = 0.75
+            physics.angularDamping = 0.75
+        }
         addChild(myBase)
         
         /* Generates the first four cards of your deck */
@@ -172,6 +199,21 @@ class MeleeScene: SKScene {
                                     manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - cost
                                     manaLabel.text = "\(newVal)"
+                                    let body1 = SKPhysicsBody(rectangleOfSize: monster.size, center: CGPointMake((monster.size.width/2), (monster.size.height/2)))
+                                    let vision = CGSize(width: monster.size.width*2, height: monster.size.height*2)
+                                    let body2 = SKPhysicsBody(rectangleOfSize: vision, center: CGPointMake((monster.size.width/2), (monster.size.height/2)))
+                                    body2.categoryBitMask = playerCategory
+                                    body2.contactTestBitMask = baseCategory
+                                    body2.collisionBitMask = baseCategory
+                                    monster.physicsBody = SKPhysicsBody(bodies: [body1, body2])
+                                    if let physics = monster.physicsBody {
+                                        physics.affectedByGravity = false
+                                        physics.allowsRotation = true
+                                        physics.dynamic = true
+                                        physics.usesPreciseCollisionDetection = true
+                                        physics.linearDamping = 0.75
+                                        physics.angularDamping = 0.75
+                                    }
                                     addChild(monster)
                                     spawnMonster(monster)
                                     drawCard()
@@ -189,6 +231,14 @@ class MeleeScene: SKScene {
                                     manaBar.size.height -= manaCost
                                     let newVal = Int(manaLabel.text!)! - cost  
                                     manaLabel.text = "\(newVal)"
+                                    structure.physicsBody = SKPhysicsBody(rectangleOfSize: structure.size, center: CGPointMake((structure.size.width/2), (structure.size.height/2)))
+                                    if let physics = structure.physicsBody {
+                                        physics.affectedByGravity = false
+                                        physics.allowsRotation = false
+                                        physics.dynamic = true
+                                        physics.linearDamping = 0.75
+                                        physics.angularDamping = 0.75
+                                    }
                                     addChild(structure)
                                     drawCard()
                                 }
@@ -231,5 +281,9 @@ class MeleeScene: SKScene {
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+    }
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        print("Contact: \(contact)")
     }
 }
