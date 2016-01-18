@@ -32,11 +32,19 @@ extension MutableCollectionType where Index == Int {
     }
 }
 
+struct PhysicsCategory {
+    static let None      : UInt32 = 0
+    static let All       : UInt32 = UInt32.max
+    static let Player    : UInt32 = 0b1       // 1
+    static let Base      : UInt32 = 0b10      // 2
+}
+
 class MeleeScene: SKScene, SKPhysicsContactDelegate {
     
     let baseCategory: UInt32 = 0x1 << 1
     let playerCategory: UInt32 = 0x1 << 2
     let nothingCategory: UInt32 = 0x1 << 3
+    
     /* Global Variables and Deck */
     var selectedCard: Card?
     var manaBar = SKSpriteNode()
@@ -88,9 +96,9 @@ class MeleeScene: SKScene, SKPhysicsContactDelegate {
             physics.pinned = true
             physics.linearDamping = 0.75
             physics.angularDamping = 0.75
-            physics.categoryBitMask = baseCategory
-            physics.contactTestBitMask = playerCategory
-            physics.collisionBitMask = playerCategory
+            physics.categoryBitMask = PhysicsCategory.Base
+            physics.contactTestBitMask = PhysicsCategory.Player
+            physics.collisionBitMask = PhysicsCategory.None
             
         }
         addChild(enemyBase)
@@ -202,9 +210,9 @@ class MeleeScene: SKScene, SKPhysicsContactDelegate {
                                     let body1 = SKPhysicsBody(rectangleOfSize: monster.size, center: CGPointMake((monster.size.width/2), (monster.size.height/2)))
                                     let vision = CGSize(width: monster.size.width*2, height: monster.size.height*2)
                                     let body2 = SKPhysicsBody(rectangleOfSize: vision, center: CGPointMake((monster.size.width/2), (monster.size.height/2)))
-                                    body2.categoryBitMask = playerCategory
-                                    body2.contactTestBitMask = baseCategory
-                                    body2.collisionBitMask = baseCategory
+                                    body2.categoryBitMask = PhysicsCategory.Player
+                                    body2.contactTestBitMask = PhysicsCategory.Base
+                                    body2.collisionBitMask = PhysicsCategory.None
                                     monster.physicsBody = SKPhysicsBody(bodies: [body1, body2])
                                     if let physics = monster.physicsBody {
                                         physics.affectedByGravity = false
@@ -213,6 +221,9 @@ class MeleeScene: SKScene, SKPhysicsContactDelegate {
                                         physics.usesPreciseCollisionDetection = true
                                         physics.linearDamping = 0.75
                                         physics.angularDamping = 0.75
+                                        physics.categoryBitMask = PhysicsCategory.Player
+                                        physics.contactTestBitMask = PhysicsCategory.Base
+                                        physics.collisionBitMask = PhysicsCategory.None
                                     }
                                     addChild(monster)
                                     spawnMonster(monster)
@@ -236,6 +247,7 @@ class MeleeScene: SKScene, SKPhysicsContactDelegate {
                                         physics.affectedByGravity = false
                                         physics.allowsRotation = false
                                         physics.dynamic = true
+                                        physics.pinned = true
                                         physics.linearDamping = 0.75
                                         physics.angularDamping = 0.75
                                     }
@@ -285,5 +297,9 @@ class MeleeScene: SKScene, SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
         print("Contact: \(contact)")
+        if (contact.bodyA.categoryBitMask == PhysicsCategory.Base || contact.bodyB.categoryBitMask == PhysicsCategory.Base) {
+            let enemyBase = self.childNodeWithName("EnemyBase") as! SKSpriteNode
+            print("attacking base: \(enemyBase)")
+        }
     }
 }
