@@ -208,22 +208,20 @@ class MeleeScene: SKScene, SKPhysicsContactDelegate {
                                     let newVal = Int(manaLabel.text!)! - cost
                                     manaLabel.text = "\(newVal)"
                                     let body1 = SKPhysicsBody(rectangleOfSize: monster.size, center: CGPointMake((monster.size.width/2), (monster.size.height/2)))
+                                    body1.collisionBitMask = PhysicsCategory.All
                                     let vision = CGSize(width: monster.size.width*2, height: monster.size.height*2)
                                     let body2 = SKPhysicsBody(rectangleOfSize: vision, center: CGPointMake((monster.size.width/2), (monster.size.height/2)))
-                                    body2.categoryBitMask = PhysicsCategory.Player
-                                    body2.contactTestBitMask = PhysicsCategory.Base
                                     body2.collisionBitMask = PhysicsCategory.None
                                     monster.physicsBody = SKPhysicsBody(bodies: [body1, body2])
                                     if let physics = monster.physicsBody {
                                         physics.affectedByGravity = false
-                                        physics.allowsRotation = true
+                                        physics.allowsRotation = false
                                         physics.dynamic = true
                                         physics.usesPreciseCollisionDetection = true
                                         physics.linearDamping = 0.75
                                         physics.angularDamping = 0.75
                                         physics.categoryBitMask = PhysicsCategory.Player
                                         physics.contactTestBitMask = PhysicsCategory.Base
-                                        physics.collisionBitMask = PhysicsCategory.None
                                     }
                                     addChild(monster)
                                     spawnMonster(monster)
@@ -298,8 +296,9 @@ class MeleeScene: SKScene, SKPhysicsContactDelegate {
     func didBeginContact(contact: SKPhysicsContact) {
         print("Contact: \(contact)")
         if (contact.bodyA.categoryBitMask == PhysicsCategory.Base || contact.bodyB.categoryBitMask == PhysicsCategory.Base) {
-            let enemyBase = self.childNodeWithName("EnemyBase") as! SKSpriteNode
-            print("attacking base: \(enemyBase)")
+            let enemyBase = self.childNodeWithName("EnemyBase") as! Building
+            enemyBase.hp -= 5
+            print("Enemy Base Hp: \(enemyBase.hp)")
         }
     }
 }
